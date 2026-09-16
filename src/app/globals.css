@@ -1,0 +1,300 @@
+@import "tailwindcss";
+
+:root {
+  /* Core Cosmic Color Palette */
+  --background: #030712;
+  --background-deep: #02040a;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-hover: rgba(255, 255, 255, 0.06);
+  --surface-active: rgba(255, 255, 255, 0.09);
+
+  /* Typography Colors */
+  --foreground: #f5f5f5;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+
+  /* Subtle Cosmic Borders */
+  --border-subtle: rgba(255, 255, 255, 0.10);
+  --border-highlight: rgba(255, 255, 255, 0.20);
+
+  /* Accents */
+  --accent-gold: #d6a85f;
+  --accent-gold-glow: rgba(214, 168, 95, 0.15);
+  --accent-blue: #38bdf8;
+  --accent-blue-glow: rgba(56, 189, 248, 0.15);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-deep: var(--background-deep);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+
+  --color-foreground: var(--foreground);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-highlight: var(--border-highlight);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-blue: var(--accent-blue);
+
+  --font-sans: var(--font-sans-main), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-display-main), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-mono-main), monospace;
+}
+
+/* Global Reset & Base Setup */
+html {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans-main), system-ui, -apple-system, sans-serif;
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans-main), system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Text Selection */
+::selection {
+  background-color: rgba(214, 168, 95, 0.25);
+  color: #ffffff;
+}
+
+/* Minimal Dark Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Typography Hierarchy Matching Reference Design */
+.font-logo {
+  font-family: var(--font-display-main), system-ui, sans-serif;
+  letter-spacing: 0.35em;
+  font-weight: 500;
+}
+
+.font-display {
+  font-family: var(--font-sans-main), system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.font-heading {
+  font-family: var(--font-sans-main), system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.text-label {
+  font-family: var(--font-mono-main), monospace;
+  font-size: 0.6875rem; /* 11px */
+  line-height: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.text-body {
+  font-family: var(--font-sans-main), system-ui, sans-serif;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* Text Glow Utilities */
+.text-glow-white {
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.15);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 15px rgba(214, 168, 95, 0.5), 0 0 30px rgba(214, 168, 95, 0.2);
+}
+
+.text-glow-blue {
+  text-shadow: 0 0 20px rgba(56, 189, 248, 0.5), 0 0 35px rgba(56, 189, 248, 0.2);
+}
+
+/* Glass Panel System Utility */
+.glass-panel {
+  background: rgba(12, 17, 29, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel:hover {
+  background: rgba(17, 24, 39, 0.85);
+  border-color: var(--border-highlight);
+}
+
+/* Reusable Button System Matching Reference Design */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f5f5f5;
+  font-family: var(--font-sans-main), system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.06);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 9999px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--foreground);
+  font-family: var(--font-sans-main), system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Icon Container for Play / Action Button */
+.play-icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-secondary:hover .play-icon-circle {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Atmospheric Glow Utilities */
+.glow-ambient {
+  box-shadow: 0 0 80px -20px rgba(56, 189, 248, 0.08);
+}
+
+.glow-warm {
+  box-shadow: 0 0 50px -10px var(--accent-gold-glow);
+}
+
+.glow-cool {
+  box-shadow: 0 0 50px -10px var(--accent-blue-glow);
+}
+
+.glow-subtle {
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.03);
+}
+
+/* Subtle Cosmic Radial Background Atmosphere */
+.bg-cosmic-radial {
+  background-image: radial-gradient(
+    circle at 50% 30%,
+    rgba(15, 23, 42, 0.6) 0%,
+    rgba(3, 7, 18, 0.95) 70%,
+    #030712 100%
+  );
+}
+
+/* Reusable Layout Utilities */
+.layout-container {
+  width: 100%;
+  max-width: 84rem; /* 1344px */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .layout-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .layout-container {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.section-viewport {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
