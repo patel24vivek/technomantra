@@ -5,4 +5,7 @@ export { default as Sun } from "./Sun";
 export { default as Orbits, ORBIT_CONFIGS } from "./Orbits";
 export { default as Planet } from "./Planet";
 export { default as Planets } from "./Planets";
+export { default as AsteroidBelt } from "./AsteroidBelt";
+export { default as MouseParallax } from "./MouseParallax";
+export { default as CinematicCamera } from "./CinematicCamera";
 export { PLANET_DATA } from "./planetData";

@@ -1,50 +1,42 @@
 "use client";
 
+import { useRef } from "react";
 import Navigation from "./Navigation";
 import HeroContent from "./HeroContent";
-import ScrollIndicator from "./ScrollIndicator";
+import ScrollController from "@/components/scroll/ScrollController";
 
 export default function Hero({ canvasContainer }) {
+  const heroRef = useRef(null);
+
   return (
-    <section className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-cosmic-radial bg-[var(--background)] text-[var(--foreground)]">
+    <section ref={heroRef} className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-cosmic-radial bg-[var(--background)] text-[var(--foreground)]">
+      {/* GSAP ScrollTrigger Foundation Controller */}
+      <ScrollController triggerRef={heroRef} />
+
       {/* 3D WebGL Background / Scene Container (Interactive Canvas Layer) */}
-      <div className="absolute inset-0 z-0 opacity-90">
+      <div className="absolute inset-0 z-10 pointer-events-auto opacity-90">
         {canvasContainer}
       </div>
 
       {/* Top Navigation */}
       <Navigation />
 
-      {/* Main Hero Body - Two Column Composition on Desktop */}
-      <div className="relative z-10 flex-1 flex items-center layout-container py-12 lg:py-0 pointer-events-none">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      {/* Main Hero Body - Full Screen Width with Responsive Side Padding */}
+      <div className="relative z-10 flex-1 flex items-center w-full px-4 sm:px-8 lg:px-16 xl:px-20 py-6 sm:py-10 lg:py-0 pointer-events-none">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
           
-          {/* Left Column (Hero Content: ~45% width on desktop) */}
-          <div className="lg:col-span-6 xl:col-span-5 flex flex-col justify-center">
+          {/* Left Column (Main Title Content) */}
+          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center">
             <HeroContent />
           </div>
 
-          {/* Right Column (Reserved 3D Solar System Scene Container: ~55% width) */}
-          <div className="lg:col-span-6 xl:col-span-7 relative h-[300px] sm:h-[400px] lg:h-[550px] xl:h-[650px] w-full flex items-center justify-center pointer-events-none">
-            {/* Conceptual reserved scene wrapper for future R3F Solar System */}
-            <div className="hero-scene relative w-full h-full flex items-center justify-center pointer-events-none">
-              {/* Natural background blend - no visible placeholder box */}
-            </div>
+          {/* Right Column (3D Solar System Space Area) */}
+          <div className="lg:col-span-6 xl:col-span-6 relative h-[280px] sm:h-[400px] lg:h-[600px] xl:h-[700px] w-full flex items-center justify-center pointer-events-none">
+            <div className="hero-scene relative w-full h-full flex items-center justify-center pointer-events-none" />
           </div>
 
-        </div>
-      </div>
-
-      {/* Hero Footer / Scroll Indicator */}
-      <div className="relative z-10 layout-container pb-8 pt-4 flex justify-between items-end pointer-events-none">
-        <div className="pointer-events-auto">
-          <ScrollIndicator />
-        </div>
-        <div className="text-[10px] font-mono tracking-[0.2em] text-[var(--text-muted)] uppercase hidden sm:block pointer-events-auto">
-          Nova Digital Systems • 2026
         </div>
       </div>
     </section>
   );
 }
-

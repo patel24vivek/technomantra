@@ -71,11 +71,11 @@ function createSolarSurfaceTexture() {
 // 2. Generate smooth, edge-free radial atmospheric glow texture
 function createSoftGlowTexture() {
   const canvas = document.createElement("canvas");
-  canvas.width = 512;
-  canvas.height = 512;
+  canvas.width = 256;
+  canvas.height = 256;
   const ctx = canvas.getContext("2d");
 
-  const gradient = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
+  const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
   gradient.addColorStop(0.0, "rgba(255, 255, 240, 1.0)");   // Radiant white core
   gradient.addColorStop(0.15, "rgba(255, 200, 50, 0.85)");  // Glowing golden aura
   gradient.addColorStop(0.4, "rgba(245, 130, 10, 0.40)");   // Warm solar corona
@@ -83,7 +83,7 @@ function createSoftGlowTexture() {
   gradient.addColorStop(1.0, "rgba(3, 7, 18, 0.0)");       // Completely invisible at edges
 
   ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, 512, 512);
+  ctx.fillRect(0, 0, 256, 256);
 
   return new THREE.CanvasTexture(canvas);
 }
@@ -100,6 +100,14 @@ export default function Sun({ position = [2.0, 0, 0], scale = 0.95 }) {
     surfaceTextureRef.current = surface;
     return [surface, glow];
   }, []);
+
+  // Clean up WebGL texture memory on unmount
+  useMemo(() => {
+    return () => {
+      if (surfaceTexture) surfaceTexture.dispose();
+      if (glowTexture) glowTexture.dispose();
+    };
+  }, [surfaceTexture, glowTexture]);
 
   useFrame((_, delta) => {
     if (sunRef.current) {
@@ -141,7 +149,7 @@ export default function Sun({ position = [2.0, 0, 0], scale = 0.95 }) {
 
       {/* 3D Realistic Glowing Organic Solar Core */}
       <mesh ref={sunRef}>
-        <sphereGeometry args={[1.28, 64, 64]} />
+        <sphereGeometry args={[1.28, 48, 48]} />
         <MeshDistortMaterial
           map={surfaceTexture}
           emissiveMap={surfaceTexture}
