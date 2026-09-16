@@ -4,6 +4,8 @@ import { WhatWeDo } from "@/components/what-we-do";
 import { Services } from "@/components/services";
 import { Solutions } from "@/components/solutions";
 import { Industries } from "@/components/industries";
+import { Projects } from "@/components/projects";
+import { Insights } from "@/components/insights";
 
 export default function Home() {
   return (
@@ -22,6 +24,12 @@ export default function Home() {
 
       {/* Section 05: Industries */}
       <Industries />
+
+      {/* Section 06: Selected Work / Projects */}
+      <Projects />
+
+      {/* Section 07: Insights / Blog */}
+      <Insights />
     </main>
   );
 }
