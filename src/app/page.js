@@ -2,6 +2,8 @@ import { Hero } from "@/components/hero";
 import { SolarSystem } from "@/components/solar-system";
 import { WhatWeDo } from "@/components/what-we-do";
 import { Services } from "@/components/services";
+import { Solutions } from "@/components/solutions";
+import { Industries } from "@/components/industries";
 
 export default function Home() {
   return (
@@ -14,6 +16,12 @@ export default function Home() {
 
       {/* Section 03: Services */}
       <Services />
+
+      {/* Section 04: Solutions */}
+      <Solutions />
+
+      {/* Section 05: Industries */}
+      <Industries />
     </main>
   );
 }
