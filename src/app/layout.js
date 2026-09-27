@@ -5,21 +5,18 @@ import "./globals.css";
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans-main",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-display-main",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono-main",
   subsets: ["latin"],
-  weight: ["400", "500"],
   display: "swap",
 });
 
