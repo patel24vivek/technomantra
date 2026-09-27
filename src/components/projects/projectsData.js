@@ -6,7 +6,9 @@ export const PROJECTS_LIST = [
     service: "Custom ERP Development",
     description:
       "A tailored digital system designed to bring business operations, workflows and information into one connected platform.",
-    visualType: "erp",
+    imageSrc: "/images/projects/project_erp.jpg",
+    accentColor: "amber",
+    tagBg: "bg-amber-500/10 border-amber-500/30 text-amber-300",
     href: "/projects/manufacturing-erp",
     outcome: "Streamlined multi-site inventory and floor operations into real-time dashboards.",
   },
@@ -17,7 +19,9 @@ export const PROJECTS_LIST = [
     service: "Website Development",
     description:
       "A focused digital commerce experience designed around the customer's journey, product discovery and business operations.",
-    visualType: "ecommerce",
+    imageSrc: "/images/projects/project_ecommerce.jpg",
+    accentColor: "purple",
+    tagBg: "bg-purple-500/10 border-purple-500/30 text-purple-300",
     href: "/projects/omnichannel-retail",
     outcome: "Unified online sales channels with automated fulfillment sync.",
   },
@@ -28,7 +32,9 @@ export const PROJECTS_LIST = [
     service: "Custom Software",
     description:
       "A connected software solution designed to simplify workflows, reduce repetitive processes and improve visibility across the business.",
-    visualType: "automation",
+    imageSrc: "/images/projects/project_automation.jpg",
+    accentColor: "emerald",
+    tagBg: "bg-emerald-500/10 border-emerald-500/30 text-emerald-300",
     href: "/projects/supply-chain-automation",
     outcome: "Reduced manual order entry time by 80% across regional distribution nodes.",
   },

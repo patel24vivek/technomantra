@@ -136,10 +136,6 @@ export default function Services() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    // Respect reduced motion preference
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
@@ -160,6 +156,20 @@ export default function Services() {
           },
         }
       );
+
+      // ScrollTrigger active state switching for each service item
+      SERVICES_LIST.forEach((service) => {
+        const el = document.getElementById(`service-item-${service.id}`);
+        if (!el) return;
+
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 55%",
+          end: "bottom 45%",
+          onEnter: () => setActiveServiceId(service.id),
+          onEnterBack: () => setActiveServiceId(service.id),
+        });
+      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -199,7 +209,7 @@ export default function Services() {
         <div className="w-full h-px bg-[var(--border-subtle)]/40" />
 
         {/* Content Layout: Numbered List + Desktop Sticky Preview Panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start relative">
           {/* Left Column: Numbered Service List */}
           <div className="lg:col-span-7 xl:col-span-7 divide-y divide-[var(--border-subtle)]/40">
             {SERVICES_LIST.map((service) => {
@@ -207,9 +217,10 @@ export default function Services() {
               return (
                 <div
                   key={service.id}
+                  id={`service-item-${service.id}`}
                   onMouseEnter={() => setActiveServiceId(service.id)}
                   className={`group py-6 sm:py-8 transition-colors duration-300 cursor-pointer ${
-                    isActive ? "bg-sky-500/[0.03]" : ""
+                    isActive ? "bg-sky-500/[0.03] px-4 -mx-4 rounded-xl" : ""
                   }`}
                 >
                   <Link href={service.href} className="block text-decoration-none">
@@ -261,8 +272,8 @@ export default function Services() {
           </div>
 
           {/* Right Column: Desktop Sticky Visual Preview Panel */}
-          <div className="hidden lg:block lg:col-span-5 xl:col-span-5 sticky top-32">
-            <div className="w-full h-[420px] rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)]/50 backdrop-blur-xl p-4 flex flex-col justify-between shadow-2xl relative overflow-hidden">
+          <div className="hidden lg:block lg:col-span-5 xl:col-span-5 sticky top-28 self-start z-20">
+            <div className="w-full h-[420px] rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)]/80 backdrop-blur-xl p-4 flex flex-col justify-between shadow-2xl relative overflow-hidden">
               <div className="flex items-center justify-between border-b border-[var(--border-subtle)]/30 pb-3">
                 <span className="text-[11px] font-mono tracking-widest text-sky-400 uppercase">
                   {activeService.id} // {activeService.title}

@@ -62,11 +62,11 @@ export default function Insights() {
       id="insights"
       className="relative z-10 w-full min-h-screen bg-[#030712] text-[#F5F5F5] py-24 lg:py-32 px-4 sm:px-8 lg:px-16 xl:px-20 border-t border-[var(--border-subtle)]/30 flex flex-col justify-center"
     >
-      <div className="w-full max-w-7xl mx-auto space-y-16 lg:space-y-24">
+      <div className="w-full max-w-7xl mx-auto space-y-16 lg:space-y-24 relative z-10">
         {/* Header: Eyebrow, Main Heading & Supporting Copy */}
         <div className="max-w-3xl space-y-6">
           <div className="insights-reveal flex items-center gap-3">
-            <span className="text-xs font-mono text-sky-400 tracking-widest uppercase">
+            <span className="text-xs font-mono text-sky-400 tracking-widest uppercase font-semibold">
               07
             </span>
             <span className="text-xs font-mono tracking-[0.25em] text-[var(--text-secondary)] uppercase">
@@ -92,14 +92,14 @@ export default function Insights() {
           {INSIGHTS_LIST.map((article) => (
             <div
               key={article.id}
-              className="insight-article-item group py-8 sm:py-10 transition-colors duration-300 cursor-pointer hover:bg-sky-500/[0.02] px-2 sm:px-4 -mx-2 sm:-mx-4 rounded-xl"
+              className="insight-article-item group py-8 sm:py-10 transition-colors duration-300 cursor-pointer hover:bg-sky-500/[0.02] px-3 sm:px-6 -mx-3 sm:-mx-6 rounded-2xl"
             >
               <Link href={article.href} className="block text-decoration-none">
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
                   {/* Category, Title & Excerpt */}
                   <div className="space-y-3 flex-1 max-w-3xl">
-                    <div className="flex items-center gap-4">
-                      <span className="text-xs font-mono text-sky-400 tracking-widest uppercase font-medium">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs font-mono tracking-wider uppercase font-semibold px-2.5 py-0.5 rounded border text-sky-300 border-sky-500/30 bg-sky-500/10">
                         {article.category}
                       </span>
                       <span className="text-[11px] font-mono text-[var(--text-muted)]">

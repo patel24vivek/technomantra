@@ -5,134 +5,6 @@ import Link from "next/link";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { PROJECTS_LIST } from "./projectsData";
 
-// Sleek editorial mockup frame renderer
-function ProjectVisualMockup({ type, title }) {
-  switch (type) {
-    case "erp":
-      return (
-        <div className="w-full h-full min-h-[260px] sm:min-h-[320px] lg:min-h-[380px] rounded-xl border border-sky-500/20 bg-gradient-to-br from-slate-900/90 via-[#0a1120] to-black p-4 sm:p-6 flex flex-col justify-between relative overflow-hidden group-hover:border-sky-500/40 transition-colors duration-500">
-          {/* Top Bar */}
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-700" />
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-700" />
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-700" />
-            </div>
-            <span className="text-[10px] font-mono text-sky-400 tracking-widest uppercase">
-              ENTERPRISE ERP CORE // LIVE SYSTEM
-            </span>
-          </div>
-
-          {/* Central Mockup UI Elements */}
-          <div className="my-6 grid grid-cols-12 gap-3 flex-1">
-            <div className="col-span-4 rounded-lg border border-sky-500/20 bg-sky-500/5 p-3 flex flex-col justify-between">
-              <div className="space-y-2">
-                <div className="h-2.5 w-16 bg-sky-400/50 rounded" />
-                <div className="h-1.5 w-full bg-slate-700/50 rounded" />
-                <div className="h-1.5 w-3/4 bg-slate-700/50 rounded" />
-              </div>
-              <div className="h-6 w-full bg-sky-500/10 rounded border border-sky-500/20 flex items-center px-2">
-                <span className="text-[9px] font-mono text-sky-300">SYSTEM: ACTIVE</span>
-              </div>
-            </div>
-
-            <div className="col-span-8 rounded-lg border border-slate-800 bg-slate-900/40 p-4 flex flex-col justify-between">
-              <div className="flex items-center justify-between">
-                <div className="h-3 w-32 bg-slate-700/70 rounded" />
-                <div className="h-2 w-12 bg-sky-400/60 rounded" />
-              </div>
-              <div className="space-y-2 my-3">
-                <div className="h-2 w-full bg-slate-800 rounded" />
-                <div className="h-2 w-4/5 bg-slate-800 rounded" />
-                <div className="h-2 w-2/3 bg-slate-800 rounded" />
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="h-1.5 flex-1 bg-sky-500/40 rounded-full" />
-                <div className="h-1.5 w-8 bg-sky-400 rounded-full" />
-              </div>
-            </div>
-          </div>
-
-          {/* Footer Metadata */}
-          <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 border-t border-slate-800/60 pt-2">
-            <span>REAL-TIME INVENTORY & PRODUCTION</span>
-            <span className="text-sky-400">99.98% UPTIME</span>
-          </div>
-        </div>
-      );
-
-    case "ecommerce":
-      return (
-        <div className="w-full h-full min-h-[260px] sm:min-h-[300px] rounded-xl border border-sky-500/20 bg-gradient-to-br from-slate-900/90 via-[#0a1120] to-black p-4 sm:p-6 flex flex-col justify-between relative overflow-hidden group-hover:border-sky-500/40 transition-colors duration-500">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <span className="text-[10px] font-mono text-sky-400 tracking-widest uppercase">
-              OMNICHANNEL STOREFRONT UI
-            </span>
-            <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
-          </div>
-
-          <div className="my-4 grid grid-cols-3 gap-3 flex-1 items-center">
-            <div className="h-24 rounded-lg border border-sky-500/20 bg-sky-500/5 p-2 flex flex-col justify-between">
-              <div className="h-2 w-10 bg-sky-400/40 rounded" />
-              <div className="h-1.5 w-full bg-slate-700/50 rounded" />
-            </div>
-            <div className="h-28 rounded-lg border border-sky-400/40 bg-sky-500/10 p-2 flex flex-col justify-between shadow-[0_0_15px_rgba(56,189,248,0.15)]">
-              <div className="h-2.5 w-12 bg-sky-400/80 rounded" />
-              <div className="h-1.5 w-full bg-slate-600 rounded" />
-            </div>
-            <div className="h-24 rounded-lg border border-sky-500/20 bg-sky-500/5 p-2 flex flex-col justify-between">
-              <div className="h-2 w-10 bg-sky-400/40 rounded" />
-              <div className="h-1.5 w-full bg-slate-700/50 rounded" />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 border-t border-slate-800/60 pt-2">
-            <span>AUTOMATED FULFILLMENT SYNC</span>
-            <span className="text-sky-400">HIGH CONVERSION</span>
-          </div>
-        </div>
-      );
-
-    case "automation":
-      return (
-        <div className="w-full h-full min-h-[260px] sm:min-h-[300px] rounded-xl border border-sky-500/20 bg-gradient-to-br from-slate-900/90 via-[#0a1120] to-black p-4 sm:p-6 flex flex-col justify-between relative overflow-hidden group-hover:border-sky-500/40 transition-colors duration-500">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <span className="text-[10px] font-mono text-sky-400 tracking-widest uppercase">
-              WORKFLOW ENGINE // PIPELINE
-            </span>
-            <span className="text-[9px] font-mono text-slate-400">14 REGIONAL NODES</span>
-          </div>
-
-          <div className="my-4 flex items-center justify-between gap-2 flex-1 px-2">
-            <div className="p-3 rounded-lg border border-slate-800 bg-slate-900/60 text-center font-mono text-[10px] text-slate-400">
-              INPUT
-            </div>
-            <div className="h-0.5 flex-1 bg-sky-500/40 relative">
-              <div className="w-2 h-2 rounded-full bg-sky-400 absolute -top-0.75 left-1/2 -translate-x-1/2 shadow-[0_0_8px_#38bdf8]" />
-            </div>
-            <div className="p-3 rounded-lg border border-sky-400/50 bg-sky-500/20 text-center font-mono text-[10px] text-sky-300 font-semibold shadow-[0_0_12px_rgba(56,189,248,0.2)]">
-              AUTO ENGINE
-            </div>
-            <div className="h-0.5 flex-1 bg-sky-500/40 relative">
-              <div className="w-2 h-2 rounded-full bg-sky-400 absolute -top-0.75 left-1/2 -translate-x-1/2 shadow-[0_0_8px_#38bdf8]" />
-            </div>
-            <div className="p-3 rounded-lg border border-slate-800 bg-slate-900/60 text-center font-mono text-[10px] text-slate-400">
-              OUTPUT
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 border-t border-slate-800/60 pt-2">
-            <span>MANUAL TIME REDUCED BY 80%</span>
-            <span className="text-sky-400">ZERO DATA LOSS</span>
-          </div>
-        </div>
-      );
-
-    default:
-      return null;
-  }
-}
-
 export default function Projects() {
   const sectionRef = useRef(null);
 
@@ -191,13 +63,13 @@ export default function Projects() {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative z-10 w-full min-h-screen bg-[#030712] text-[#F5F5F5] py-24 lg:py-32 px-4 sm:px-8 lg:px-16 xl:px-20 border-t border-[var(--border-subtle)]/30 flex flex-col justify-center"
+      className="relative z-10 w-full min-h-screen bg-[#030712] text-[#F5F5F5] py-24 lg:py-32 px-4 sm:px-8 lg:px-16 xl:px-20 border-t border-[var(--border-subtle)]/30 flex flex-col justify-center overflow-hidden"
     >
-      <div className="w-full max-w-7xl mx-auto space-y-16 lg:space-y-24">
+      <div className="w-full max-w-7xl mx-auto space-y-16 lg:space-y-24 relative z-10">
         {/* Header: Eyebrow, Main Heading & Supporting Copy */}
         <div className="max-w-3xl space-y-6">
           <div className="projects-reveal flex items-center gap-3">
-            <span className="text-xs font-mono text-sky-400 tracking-widest uppercase">
+            <span className="text-xs font-mono text-sky-400 tracking-widest uppercase font-semibold">
               06
             </span>
             <span className="text-xs font-mono tracking-[0.25em] text-[var(--text-secondary)] uppercase">
@@ -222,21 +94,39 @@ export default function Projects() {
         <div className="space-y-16 lg:space-y-20">
           {/* 01: Large Featured Case Study */}
           <div className="project-card-item group cursor-pointer space-y-6">
-            <div className="overflow-hidden rounded-2xl transition-transform duration-500 group-hover:scale-[1.01]">
-              <ProjectVisualMockup
-                type={featuredProject.visualType}
-                title={featuredProject.title}
-              />
+            <div className="relative overflow-hidden rounded-2xl border border-sky-500/30 bg-slate-900/90 shadow-2xl transition-all duration-500 group-hover:border-sky-400/60 group-hover:scale-[1.01]">
+              {/* Top Browser Header Bar */}
+              <div className="h-10 bg-slate-950 px-4 border-b border-slate-800 flex items-center justify-between z-10 relative">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                </div>
+                <span className="text-[10px] font-mono text-sky-400 tracking-wider">
+                  CASE STUDY // MANUFACTURING ERP
+                </span>
+                <span className="text-xs font-mono text-slate-500">LIVE SYSTEM</span>
+              </div>
+
+              {/* Real High Definition Image */}
+              <div className="relative w-full aspect-video min-h-[300px] sm:min-h-[420px] bg-slate-950">
+                <img
+                  src={featuredProject.imageSrc}
+                  alt={featuredProject.title}
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent opacity-60" />
+              </div>
             </div>
 
             {/* Metadata & Title */}
             <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 pt-2">
-              <div className="space-y-2 max-w-2xl">
+              <div className="space-y-3 max-w-2xl">
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-sky-400 font-medium">
+                  <span className="text-xs font-mono text-sky-400 font-semibold">
                     {featuredProject.id}
                   </span>
-                  <span className="text-xs font-mono tracking-wider text-slate-400 uppercase">
+                  <span className="text-xs font-mono tracking-wider px-3 py-0.5 rounded border uppercase text-sky-300 border-sky-500/30 bg-sky-500/10">
                     {featuredProject.industry} · {featuredProject.service}
                   </span>
                 </div>
@@ -246,6 +136,10 @@ export default function Projects() {
                 <p className="text-sm sm:text-base text-[var(--text-secondary)] font-sans leading-relaxed">
                   {featuredProject.description}
                 </p>
+                <div className="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 pt-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>{featuredProject.outcome}</span>
+                </div>
               </div>
 
               <Link
@@ -268,8 +162,27 @@ export default function Projects() {
                 className="project-card-item group cursor-pointer space-y-6 flex flex-col justify-between"
               >
                 <div className="space-y-6">
-                  <div className="overflow-hidden rounded-2xl transition-transform duration-500 group-hover:scale-[1.01]">
-                    <ProjectVisualMockup type={proj.visualType} title={proj.title} />
+                  <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/90 shadow-xl transition-all duration-500 group-hover:border-sky-500/40 group-hover:scale-[1.01]">
+                    {/* Top Browser Header Bar */}
+                    <div className="h-9 bg-slate-950 px-3 border-b border-slate-800 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-rose-500/80" />
+                        <span className="w-2 h-2 rounded-full bg-amber-500/80" />
+                        <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
+                      </div>
+                      <span className="text-[9px] font-mono text-slate-400 tracking-wider">
+                        {proj.industry.toUpperCase()}
+                      </span>
+                    </div>
+
+                    <div className="relative w-full aspect-video min-h-[220px] bg-slate-950">
+                      <img
+                        src={proj.imageSrc}
+                        alt={proj.title}
+                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent opacity-60" />
+                    </div>
                   </div>
 
                   <div className="space-y-3">
@@ -277,7 +190,7 @@ export default function Projects() {
                       <span className="text-xs font-mono text-sky-400 font-medium">
                         {proj.id}
                       </span>
-                      <span className="text-xs font-mono tracking-wider text-slate-400 uppercase">
+                      <span className="text-xs font-mono tracking-wider px-2.5 py-0.5 rounded border uppercase text-sky-300 border-sky-500/30 bg-sky-500/10">
                         {proj.industry} · {proj.service}
                       </span>
                     </div>

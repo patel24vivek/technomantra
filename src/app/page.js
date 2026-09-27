@@ -2,10 +2,12 @@ import { Hero } from "@/components/hero";
 import { SolarSystem } from "@/components/solar-system";
 import { WhatWeDo } from "@/components/what-we-do";
 import { Services } from "@/components/services";
+import { ResponsiveSection } from "@/components/responsive";
 import { Solutions } from "@/components/solutions";
 import { Industries } from "@/components/industries";
 import { Projects } from "@/components/projects";
 import { Insights } from "@/components/insights";
+import { Footer } from "@/components/layout";
 
 export default function Home() {
   return (
@@ -19,6 +21,9 @@ export default function Home() {
       {/* Section 03: Services */}
       <Services />
 
+      {/* Section: Responsive by Design */}
+      <ResponsiveSection />
+
       {/* Section 04: Solutions */}
       <Solutions />
 
@@ -30,6 +35,9 @@ export default function Home() {
 
       {/* Section 07: Insights / Blog */}
       <Insights />
+
+      {/* Section 08 & Global Layout: Comprehensive Footer */}
+      <Footer />
     </main>
   );
 }

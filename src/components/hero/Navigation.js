@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui";
@@ -9,56 +10,64 @@ const SERVICES_DATA = [
   {
     category: "Software & Web",
     items: [
-      { label: "Website Development", href: "#website-development", desc: "Custom, high-speed & responsive web apps" },
-      { label: "Custom ERP Development", href: "#erp-development", desc: "Tailored enterprise resource management" },
-      { label: "CRM Development", href: "#crm-development", desc: "Custom customer relationship systems" },
-      { label: "Accounting Software", href: "#accounting-software", desc: "Automated financial & ledger solutions" },
-      { label: "Dedicated Developers", href: "#dedicated-developers", desc: "On-demand expert engineering talent" },
+      { label: "Website Development", href: "/services/website-development", desc: "Custom, high-speed & responsive web apps" },
+      { label: "Custom ERP Development", href: "/services/erp-development", desc: "Tailored enterprise resource management" },
+      { label: "CRM Development", href: "/services/crm-development", desc: "Custom customer relationship systems" },
+      { label: "Accounting Software", href: "/services/accounting-software", desc: "Automated financial & ledger solutions" },
+      { label: "Dedicated Developers", href: "/services/dedicated-developers", desc: "On-demand expert engineering talent" },
     ],
   },
   {
     category: "Digital Growth",
     items: [
-      { label: "Digital Marketing", href: "#digital-marketing", desc: "Data-driven multi-channel growth" },
-      { label: "SEO Services", href: "#seo-services", desc: "Top rank organic search optimization" },
-      { label: "Email Marketing", href: "#email-marketing", desc: "High-converting lifecycle campaigns" },
+      { label: "Digital Marketing", href: "/services/digital-marketing", desc: "Data-driven multi-channel growth" },
+      { label: "SEO Services", href: "/services/seo-services", desc: "Top rank organic search optimization" },
+      { label: "Email Marketing", href: "/services/email-marketing", desc: "High-converting lifecycle campaigns" },
     ],
   },
   {
     category: "Design & Media",
     items: [
-      { label: "Graphic Design", href: "#graphic-design", desc: "Premium visual branding & assets" },
-      { label: "Packaging Design", href: "#packaging-design", desc: "Standout product box & print design" },
-      { label: "Corporate Video", href: "#corporate-video", desc: "Cinematic commercial & brand films" },
+      { label: "Graphic Design", href: "/services/graphic-design", desc: "Premium visual branding & assets" },
+      { label: "Packaging Design", href: "/services/packaging-design", desc: "Standout product box & print design" },
+      { label: "Corporate Video", href: "/services/corporate-video", desc: "Cinematic commercial & brand films" },
     ],
   },
 ];
 
 const SOLUTIONS_DATA = [
-  { label: "CRM Solutions", href: "#crm-solutions", desc: "Streamline sales, leads & customer lifecycles" },
-  { label: "ERP Solutions", href: "#erp-solutions", desc: "Unify operations, inventory & financials" },
-  { label: "Business Automation", href: "#business-automation", desc: "Eliminate repetitive tasks with AI workflows" },
-  { label: "Ecommerce Solutions", href: "#ecommerce-solutions", desc: "High-scale online store platforms" },
-  { label: "Marketing Automation", href: "#marketing-automation", desc: "Automated multi-touch nurture funnels" },
+  { label: "CRM Solutions", href: "/solutions#crm-solutions", desc: "Streamline sales, leads & customer lifecycles" },
+  { label: "ERP Solutions", href: "/solutions#erp-solutions", desc: "Unify operations, inventory & financials" },
+  { label: "Business Automation", href: "/solutions#business-automation", desc: "Eliminate repetitive tasks with AI workflows" },
+  { label: "Ecommerce Solutions", href: "/solutions#ecommerce-solutions", desc: "High-scale online store platforms" },
+  { label: "Marketing Automation", href: "/solutions#marketing-automation", desc: "Automated multi-touch nurture funnels" },
 ];
 
 const INDUSTRIES_DATA = [
-  { label: "Manufacturing", href: "#manufacturing" },
-  { label: "Trading", href: "#trading" },
-  { label: "Ecommerce", href: "#ecommerce" },
-  { label: "Healthcare", href: "#healthcare" },
-  { label: "Finance", href: "#finance" },
-  { label: "Education", href: "#education" },
-  { label: "Real Estate", href: "#real-estate" },
-  { label: "Exporters & Importers", href: "#exporters-importers" },
-  { label: "Hospitality", href: "#hospitality" },
-  { label: "Non-profit Organisations", href: "#non-profit" },
+  { label: "Manufacturing", href: "/industries/manufacturing" },
+  { label: "Trading", href: "/industries/trading" },
+  { label: "Ecommerce", href: "/industries/ecommerce" },
+  { label: "Healthcare", href: "/industries/healthcare" },
+  { label: "Finance", href: "/industries/finance" },
+  { label: "Education", href: "/industries/education" },
+  { label: "Real Estate", href: "/industries/real-estate" },
+  { label: "Exporters & Importers", href: "/industries/exporters-importers" },
+  { label: "Hospitality", href: "/industries/hospitality" },
+  { label: "Non-profit Organisations", href: "/industries/non-profit" },
 ];
 
 export default function Navigation() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileExpanded, setMobileExpanded] = useState({});
+
+  const isHome = pathname === "/";
+  const isAbout = pathname === "/about";
+  const isServices = pathname?.startsWith("/services");
+  const isSolutions = pathname?.startsWith("/solutions");
+  const isIndustries = pathname?.startsWith("/industries");
+  const isContact = pathname === "/contact";
 
   const toggleMobileAccordion = (key) => {
     setMobileExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -86,36 +95,32 @@ export default function Navigation() {
           {/* Home */}
           <Link
             href="/"
-            className="px-3 py-1.5 rounded-full text-xs font-medium tracking-wide text-white bg-white/10 hover:bg-white/15 transition-all duration-300 flex items-center gap-1.5"
+            className={`px-3 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-300 flex items-center gap-1.5 ${
+              isHome
+                ? "text-white bg-white/10 shadow-sm"
+                : "text-[var(--text-secondary)] hover:text-white"
+            }`}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-gold)] shadow-[0_0_8px_var(--accent-gold)]" />
+            {isHome && (
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-gold)] shadow-[0_0_8px_var(--accent-gold)]" />
+            )}
             Home
           </Link>
 
-          {/* About Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setActiveDropdown("about")}
-            onMouseLeave={() => setActiveDropdown(null)}
+          {/* About */}
+          <Link
+            href="/about"
+            className={`px-3 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-300 flex items-center gap-1.5 ${
+              isAbout
+                ? "text-white bg-white/10 shadow-sm"
+                : "text-[var(--text-secondary)] hover:text-white"
+            }`}
           >
-            <button className="px-3 py-1.5 rounded-full text-xs font-medium tracking-wide text-[var(--text-secondary)] hover:text-white transition-colors duration-200 flex items-center gap-1">
-              About
-              <svg className="w-3 h-3 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            {activeDropdown === "about" && (
-              <div className="absolute top-full left-0 mt-2 w-56 rounded-xl border border-[var(--border-subtle)] bg-[#0B1120]/95 backdrop-blur-2xl p-2 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200 z-50">
-                <Link
-                  href="#about"
-                  className="block px-3 py-2 rounded-lg text-xs text-slate-200 hover:text-white hover:bg-sky-500/10 transition-colors"
-                >
-                  <div className="font-semibold text-white">About TechnoMantra</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Empowering digital evolution</div>
-                </Link>
-              </div>
+            {isAbout && (
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-gold)] shadow-[0_0_8px_var(--accent-gold)]" />
             )}
-          </div>
+            About
+          </Link>
 
           {/* Services Mega Dropdown */}
           <div
@@ -123,14 +128,35 @@ export default function Navigation() {
             onMouseEnter={() => setActiveDropdown("services")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
-            <button className="px-3 py-1.5 rounded-full text-xs font-medium tracking-wide text-[var(--text-secondary)] hover:text-white transition-colors duration-200 flex items-center gap-1">
+            <Link
+              href="/services"
+              className={`px-3 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-300 flex items-center gap-1 ${
+                isServices
+                  ? "text-white bg-white/10 shadow-sm"
+                  : "text-[var(--text-secondary)] hover:text-white"
+              }`}
+            >
+              {isServices && (
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-gold)] shadow-[0_0_8px_var(--accent-gold)]" />
+              )}
               Services
               <svg className="w-3 h-3 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
-            </button>
+            </Link>
             {activeDropdown === "services" && (
               <div className="absolute top-full -left-20 mt-2 w-[680px] rounded-2xl border border-[var(--border-subtle)] bg-[#0B1120]/95 backdrop-blur-2xl p-6 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800">
+                  <span className="text-xs font-mono text-slate-400 font-semibold uppercase tracking-wider">
+                    Our Core Capabilities
+                  </span>
+                  <Link
+                    href="/services"
+                    className="text-xs font-mono text-sky-400 hover:text-sky-300 transition-colors font-medium flex items-center gap-1"
+                  >
+                    Explore Full 11-Service Catalogue →
+                  </Link>
+                </div>
                 <div className="grid grid-cols-3 gap-6">
                   {SERVICES_DATA.map((cat) => (
                     <div key={cat.category} className="space-y-3">
@@ -166,20 +192,41 @@ export default function Navigation() {
             onMouseEnter={() => setActiveDropdown("solutions")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
-            <button className="px-3 py-1.5 rounded-full text-xs font-medium tracking-wide text-[var(--text-secondary)] hover:text-white transition-colors duration-200 flex items-center gap-1">
+            <Link
+              href="/solutions"
+              className={`px-3 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all duration-300 flex items-center gap-1 ${
+                isSolutions
+                  ? "text-white bg-white/10 shadow-sm"
+                  : "text-[var(--text-secondary)] hover:text-white"
+              }`}
+            >
+              {isSolutions && (
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-gold)] shadow-[0_0_8px_var(--accent-gold)]" />
+              )}
               Solutions
               <svg className="w-3 h-3 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
-            </button>
+            </Link>
             {activeDropdown === "solutions" && (
-              <div className="absolute top-full left-0 mt-2 w-72 rounded-2xl border border-[var(--border-subtle)] bg-[#0B1120]/95 backdrop-blur-2xl p-3 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+              <div className="absolute top-full -left-10 mt-2 w-80 rounded-2xl border border-[var(--border-subtle)] bg-[#0B1120]/95 backdrop-blur-2xl p-4 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                <div className="flex items-center justify-between pb-2.5 mb-2 border-b border-slate-800">
+                  <span className="text-[11px] font-mono text-slate-400 font-semibold uppercase tracking-wider">
+                    Connected Solutions
+                  </span>
+                  <Link
+                    href="/solutions"
+                    className="text-[11px] font-mono text-sky-400 hover:text-sky-300 transition-colors font-medium flex items-center gap-1"
+                  >
+                    View All →
+                  </Link>
+                </div>
                 <div className="space-y-1">
                   {SOLUTIONS_DATA.map((sol) => (
                     <Link
                       key={sol.label}
                       href={sol.href}
-                      className="group/sol block p-2.5 rounded-xl hover:bg-sky-500/10 transition-colors"
+                      className="group/sol block p-2 rounded-xl hover:bg-sky-500/10 transition-colors"
                     >
                       <div className="text-xs font-medium text-slate-200 group-hover/sol:text-sky-300 transition-colors">
                         {sol.label}
@@ -229,7 +276,7 @@ export default function Navigation() {
 
           {/* Projects / Case Studies */}
           <Link
-            href="#projects"
+            href="/#projects"
             className="px-3 py-1.5 rounded-full text-xs font-medium tracking-wide text-[var(--text-secondary)] hover:text-white transition-colors duration-200 whitespace-nowrap"
           >
             Projects
@@ -237,7 +284,7 @@ export default function Navigation() {
 
           {/* Insights / Blog */}
           <Link
-            href="#insights"
+            href="/#insights"
             className="px-3 py-1.5 rounded-full text-xs font-medium tracking-wide text-[var(--text-secondary)] hover:text-white transition-colors duration-200 whitespace-nowrap"
           >
             Insights
@@ -245,7 +292,7 @@ export default function Navigation() {
 
           {/* Contact */}
           <Link
-            href="#contact"
+            href="/contact"
             className="px-3 py-1.5 rounded-full text-xs font-medium tracking-wide text-[var(--text-secondary)] hover:text-white transition-colors duration-200"
           >
             Contact
@@ -254,7 +301,7 @@ export default function Navigation() {
 
         {/* Right: Request a Proposal CTA */}
         <div className="hidden sm:flex items-center gap-4 shrink-0">
-          <Button href="#proposal" variant="primary" className="text-xs px-5 py-2.5 whitespace-nowrap">
+          <Button href="/request-a-proposal" variant="primary" className="text-xs px-5 py-2.5 whitespace-nowrap">
             Request a Proposal <span className="text-xs ml-1">→</span>
           </Button>
         </div>
@@ -287,34 +334,14 @@ export default function Navigation() {
             Home
           </Link>
 
-          {/* About Accordion */}
-          <div className="border-b border-slate-800/60 py-2">
-            <button
-              onClick={() => toggleMobileAccordion("about")}
-              className="w-full flex items-center justify-between text-sm font-semibold text-slate-200"
-            >
-              <span>About</span>
-              <svg
-                className={`w-4 h-4 transition-transform duration-200 ${mobileExpanded.about ? "rotate-180" : ""}`}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            {mobileExpanded.about && (
-              <div className="mt-2 pl-4 space-y-2">
-                <Link
-                  href="#about"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-xs text-sky-400 py-1"
-                >
-                  About TechnoMantra
-                </Link>
-              </div>
-            )}
-          </div>
+          {/* About (Direct Link) */}
+          <Link
+            href="/about"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block text-sm font-semibold tracking-wider text-slate-200 py-2 border-b border-slate-800/60"
+          >
+            About
+          </Link>
 
           {/* Services Accordion */}
           <div className="border-b border-slate-800/60 py-2">
@@ -361,7 +388,12 @@ export default function Navigation() {
               onClick={() => toggleMobileAccordion("solutions")}
               className="w-full flex items-center justify-between text-sm font-semibold text-slate-200"
             >
-              <span>Solutions</span>
+              <div className="flex items-center gap-2">
+                {isSolutions && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-gold)] shadow-[0_0_8px_var(--accent-gold)]" />
+                )}
+                <span>Solutions</span>
+              </div>
               <svg
                 className={`w-4 h-4 transition-transform duration-200 ${mobileExpanded.solutions ? "rotate-180" : ""}`}
                 fill="none"
@@ -373,6 +405,13 @@ export default function Navigation() {
             </button>
             {mobileExpanded.solutions && (
               <div className="mt-2 pl-4 space-y-2">
+                <Link
+                  href="/solutions"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-xs font-mono text-sky-400 hover:text-sky-300 font-semibold py-1 mb-1"
+                >
+                  Explore All Solutions Architecture →
+                </Link>
                 {SOLUTIONS_DATA.map((sol) => (
                   <Link
                     key={sol.label}
@@ -421,7 +460,7 @@ export default function Navigation() {
 
           {/* Projects */}
           <Link
-            href="#projects"
+            href="/#projects"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-sm font-semibold tracking-wider text-slate-200 py-2 border-b border-slate-800/60"
           >
@@ -430,7 +469,7 @@ export default function Navigation() {
 
           {/* Insights */}
           <Link
-            href="#insights"
+            href="/#insights"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-sm font-semibold tracking-wider text-slate-200 py-2 border-b border-slate-800/60"
           >
@@ -439,7 +478,7 @@ export default function Navigation() {
 
           {/* Contact */}
           <Link
-            href="#contact"
+            href="/contact"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-sm font-semibold tracking-wider text-slate-200 py-2 border-b border-slate-800/60"
           >
@@ -449,7 +488,7 @@ export default function Navigation() {
           {/* CTA */}
           <div className="pt-2">
             <Button
-              href="#proposal"
+              href="/request-a-proposal"
               variant="primary"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-xs justify-center py-3"

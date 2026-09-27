@@ -1,0 +1,10 @@
+export { default as AboutHero } from "./AboutHero";
+export { default as WhoWeAre } from "./WhoWeAre";
+export { default as WhatWeBelieve } from "./WhatWeBelieve";
+export { default as WhatWeDo } from "./WhatWeDo";
+export { default as HowWeWork } from "./HowWeWork";
+export { default as Capabilities } from "./Capabilities";
+export { default as WhyTechnoMantra } from "./WhyTechnoMantra";
+export { default as Industries } from "./Industries";
+export { default as SelectedWork } from "./SelectedWork";
+export { default as AboutCTA } from "./AboutCTA";

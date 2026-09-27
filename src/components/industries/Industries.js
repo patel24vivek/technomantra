@@ -11,19 +11,20 @@ function IndustryPreviewGraphic({ activeIndustry }) {
     <div className="w-full h-full p-6 flex flex-col justify-between relative overflow-hidden">
       {/* Visual Header */}
       <div className="flex items-center justify-between border-b border-[var(--border-subtle)]/30 pb-3 z-10">
-        <span className="text-[11px] font-mono tracking-widest text-sky-400 uppercase">
+        <span className="text-[11px] font-mono tracking-widest text-sky-400 uppercase font-semibold">
           INDUSTRY ARCHITECTURE // {activeIndustry.id}
         </span>
-        <span className="text-[10px] font-mono text-[var(--text-muted)] tracking-wider">
-          WORKFLOW ADAPTATION
+        <span className="text-[10px] font-mono text-emerald-400 tracking-wider flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          TAILORED DOMAIN
         </span>
       </div>
 
       {/* Main Preview Container */}
-      <div className="flex-1 my-4 rounded-xl border border-sky-500/10 bg-black/50 p-6 flex flex-col justify-between relative overflow-hidden">
+      <div className="flex-1 my-4 rounded-xl border border-sky-500/20 bg-black/60 p-6 flex flex-col justify-between relative overflow-hidden shadow-inner">
         {/* Subtle grid background lines */}
         <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
+          className="absolute inset-0 opacity-15 pointer-events-none"
           style={{
             backgroundImage:
               "linear-gradient(#38bdf8 1px, transparent 1px), linear-gradient(90deg, #38bdf8 1px, transparent 1px)",
@@ -34,13 +35,13 @@ function IndustryPreviewGraphic({ activeIndustry }) {
         {/* Active Industry Title & Description */}
         <div className="space-y-4 relative z-10">
           <div className="flex items-center gap-3">
-            <span className="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_10px_#38bdf8]" />
             <h4 className="text-xl sm:text-2xl font-light text-white tracking-tight font-display">
               {activeIndustry.title}
             </h4>
           </div>
 
-          <p className="text-sm text-slate-300 font-sans leading-relaxed max-w-md">
+          <p className="text-sm text-slate-200 font-sans leading-relaxed max-w-md">
             {activeIndustry.description}
           </p>
         </div>
@@ -54,7 +55,7 @@ function IndustryPreviewGraphic({ activeIndustry }) {
             {activeIndustry.tags.map((tag, idx) => (
               <span
                 key={idx}
-                className="text-xs font-mono tracking-wide text-sky-300 bg-sky-500/10 border border-sky-500/30 px-3 py-1 rounded"
+                className="text-xs font-mono tracking-wide px-3 py-1 rounded border font-medium text-sky-300 border-sky-500/30 bg-sky-500/10"
               >
                 {tag}
               </span>
@@ -66,7 +67,7 @@ function IndustryPreviewGraphic({ activeIndustry }) {
       {/* Footer info */}
       <div className="pt-2 border-t border-[var(--border-subtle)]/30 flex items-center justify-between text-[10px] font-mono text-[var(--text-muted)]">
         <span>INDUSTRY → WORKFLOW → TECHNOLOGY</span>
-        <span className="text-sky-400 font-medium uppercase">TAILORED DOMAIN</span>
+        <span className="text-sky-400 font-medium uppercase">DOMAIN ADAPTABILITY</span>
       </div>
     </div>
   );
@@ -77,10 +78,6 @@ export default function Industries() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    // Respect reduced motion
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
@@ -101,6 +98,20 @@ export default function Industries() {
           },
         }
       );
+
+      // ScrollTrigger active state switching for each industry item
+      INDUSTRIES_LIST.forEach((ind) => {
+        const el = document.getElementById(`industry-item-${ind.id}`);
+        if (!el) return;
+
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 55%",
+          end: "bottom 45%",
+          onEnter: () => setActiveIndustryId(ind.id),
+          onEnterBack: () => setActiveIndustryId(ind.id),
+        });
+      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -115,11 +126,11 @@ export default function Industries() {
       id="industries"
       className="relative z-10 w-full min-h-screen bg-[#030712] text-[#F5F5F5] py-24 lg:py-32 px-4 sm:px-8 lg:px-16 xl:px-20 border-t border-[var(--border-subtle)]/30 flex flex-col justify-center"
     >
-      <div className="w-full max-w-7xl mx-auto space-y-16 lg:space-y-24">
+      <div className="w-full max-w-7xl mx-auto space-y-16 lg:space-y-24 relative z-10">
         {/* Header: Eyebrow, Main Heading & Supporting Copy */}
         <div className="max-w-3xl space-y-6">
           <div className="industries-reveal flex items-center gap-3">
-            <span className="text-xs font-mono text-sky-400 tracking-widest uppercase">
+            <span className="text-xs font-mono text-sky-400 tracking-widest uppercase font-semibold">
               05
             </span>
             <span className="text-xs font-mono tracking-[0.25em] text-[var(--text-secondary)] uppercase">
@@ -141,25 +152,26 @@ export default function Industries() {
         <div className="w-full h-px bg-[var(--border-subtle)]/40" />
 
         {/* Desktop & Mobile Layout Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Refined 2-column or single editorial list for 10 industries */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start relative">
+          {/* Left Column: 10 Industries */}
           <div className="lg:col-span-7 xl:col-span-7 divide-y divide-[var(--border-subtle)]/40">
             {INDUSTRIES_LIST.map((ind) => {
               const isActive = ind.id === activeIndustryId;
               return (
                 <div
                   key={ind.id}
+                  id={`industry-item-${ind.id}`}
                   onMouseEnter={() => setActiveIndustryId(ind.id)}
                   onClick={() => setActiveIndustryId(ind.id)}
                   className={`group py-5 sm:py-6 transition-colors duration-300 cursor-pointer ${
-                    isActive ? "bg-sky-500/[0.03]" : ""
+                    isActive ? "bg-sky-500/[0.04] px-4 -mx-4 rounded-xl" : ""
                   }`}
                 >
                   <div className="flex flex-col space-y-3">
                     <div className="flex items-center justify-between gap-4">
                       <div className="flex items-center gap-4">
                         <span
-                          className={`text-xs font-mono font-medium transition-colors duration-300 ${
+                          className={`text-xs font-mono font-semibold transition-colors duration-300 ${
                             isActive ? "text-sky-400" : "text-[var(--text-muted)]"
                           }`}
                         >
@@ -187,10 +199,10 @@ export default function Industries() {
                       </span>
                     </div>
 
-                    {/* Mobile Accordion Content (Visible on mobile / small screens when active) */}
+                    {/* Mobile Accordion Content */}
                     {isActive && (
-                      <div className="block lg:hidden space-y-3 pt-2 pl-8 border-l border-sky-500/30">
-                        <p className="text-xs text-slate-300 leading-relaxed font-sans">
+                      <div className="block lg:hidden space-y-3 pt-2 pl-8 border-l border-sky-500/40">
+                        <p className="text-xs text-slate-200 leading-relaxed font-sans">
                           {ind.description}
                         </p>
                         <div className="flex flex-wrap gap-1.5 pt-1">
@@ -212,8 +224,8 @@ export default function Industries() {
           </div>
 
           {/* Right Column: Desktop Sticky Preview Panel */}
-          <div className="hidden lg:block lg:col-span-5 xl:col-span-5 sticky top-32">
-            <div className="w-full h-[440px] rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)]/50 backdrop-blur-xl p-4 flex flex-col justify-between shadow-2xl relative overflow-hidden">
+          <div className="hidden lg:block lg:col-span-5 xl:col-span-5 sticky top-28 self-start z-20">
+            <div className="w-full h-[450px] rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)]/80 backdrop-blur-xl p-4 flex flex-col justify-between shadow-2xl relative overflow-hidden">
               <IndustryPreviewGraphic activeIndustry={activeIndustry} />
             </div>
           </div>
