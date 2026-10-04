@@ -1,1 +1,15 @@
 export { default as Projects } from "./Projects";
+export { default as ProjectsHero } from "./ProjectsHero";
+export { default as ProjectIndex } from "./ProjectIndex";
+export { default as ProjectsGrid } from "./ProjectsGrid";
+export { default as ProjectsMarquee } from "./ProjectsMarquee";
+export { default as FeaturedProjectStage } from "./FeaturedProjectStage";
+export { default as ProjectLens } from "./ProjectLens";
+export { default as ProjectStory } from "./ProjectStory";
+export { default as ProjectCapabilities } from "./ProjectCapabilities";
+export { default as ProjectList } from "./ProjectList";
+export { default as ProjectCard } from "./ProjectCard";
+export { default as ProjectArchive } from "./ProjectArchive";
+export { default as ProjectProcess } from "./ProjectProcess";
+export { default as ProjectFinder } from "./ProjectFinder";
+export { default as ProjectsCTA } from "./ProjectsCTA";

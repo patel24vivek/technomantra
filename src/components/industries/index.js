@@ -1,1 +1,10 @@
 export { default as Industries } from "./Industries";
+export { default as IndustriesHero } from "./IndustriesHero";
+export { default as IndustryUniverse } from "./IndustryUniverse";
+export { default as IndustryExplorer } from "./IndustryExplorer";
+export { default as IndustryConnections } from "./IndustryConnections";
+export { default as HowWeAdapt } from "./HowWeAdapt";
+export { default as IndustryChallenges } from "./IndustryChallenges";
+export { default as SelectedIndustryWork } from "./SelectedIndustryWork";
+export { default as IndustryFinder } from "./IndustryFinder";
+export { default as IndustriesCTA } from "./IndustriesCTA";

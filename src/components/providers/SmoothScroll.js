@@ -28,10 +28,12 @@ export default function SmoothScroll({ children }) {
     }
 
     animationFrameId = requestAnimationFrame(raf);
+    window.lenis = lenis;
 
     return () => {
       cancelAnimationFrame(animationFrameId);
       lenis.destroy();
+      window.lenis = null;
     };
   }, []);
 
