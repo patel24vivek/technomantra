@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+  import { notFound } from "next/navigation";
 import { Navigation } from "@/components/hero";
 import { Footer } from "@/components/layout";
 import {

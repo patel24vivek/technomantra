@@ -58,8 +58,8 @@ function createParticleTexture() {
 
 export default function AsteroidBelt({
   count = 750,
-  innerRadius = 4.1,
-  outerRadius = 4.7,
+  innerRadius = 5.3,
+  outerRadius = 5.9,
   sunPosition = [3.2, 0.2, 0],
   scale = 0.65,
 }) {

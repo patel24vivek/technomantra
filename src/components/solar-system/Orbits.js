@@ -5,13 +5,16 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { PLANET_DATA } from "./planetData";
 
-// Export orbit configurations so Planets can position service planets on specific paths
+// Orbital trajectories for all 8 planets of the Solar System
 export const ORBIT_CONFIGS = [
-  { id: "orbit-1", radius: 2.5, rotation: [0.35, 0.1, 0.05], opacity: 0.18, color: "#ffffff" },
-  { id: "orbit-2", radius: 3.7, rotation: [0.42, -0.15, 0.1], opacity: 0.14, color: "#e2e8f0" },
-  { id: "orbit-3", radius: 5.0, rotation: [0.28, 0.2, -0.05], opacity: 0.16, color: "#d6a85f" },
-  { id: "orbit-4", radius: 6.3, rotation: [0.48, -0.22, 0.15], opacity: 0.12, color: "#e2e8f0" },
-  { id: "orbit-5", radius: 7.7, rotation: [0.38, 0.25, -0.1], opacity: 0.10, color: "#ffffff" },
+  { id: "orbit-mercury", radius: 2.2, rotation: [0.38, 0.12, 0.05], opacity: 0.18, color: "#ffffff" },
+  { id: "orbit-venus", radius: 3.0, rotation: [0.42, -0.15, 0.10], opacity: 0.16, color: "#fed7aa" },
+  { id: "orbit-earth", radius: 3.9, rotation: [0.28, 0.18, -0.05], opacity: 0.18, color: "#bae6fd" },
+  { id: "orbit-mars", radius: 4.8, rotation: [0.46, -0.20, 0.14], opacity: 0.14, color: "#fecaca" },
+  { id: "orbit-jupiter", radius: 6.5, rotation: [0.34, 0.22, -0.08], opacity: 0.15, color: "#fde68a" },
+  { id: "orbit-saturn", radius: 8.0, rotation: [0.48, -0.24, 0.12], opacity: 0.14, color: "#fef9c3" },
+  { id: "orbit-uranus", radius: 9.4, rotation: [0.32, 0.16, -0.06], opacity: 0.12, color: "#a5f3fc" },
+  { id: "orbit-neptune", radius: 10.8, rotation: [0.40, -0.18, 0.09], opacity: 0.10, color: "#bfdbfe" },
 ];
 
 function OrbitLine({ radius, rotation, opacity, color, isHovered }) {
@@ -27,7 +30,7 @@ function OrbitLine({ radius, rotation, opacity, color, isHovered }) {
     return new THREE.BufferGeometry().setFromPoints(points);
   }, [radius]);
 
-  // Smooth lerp transition for orbit emphasis when associated planet is hovered
+  // Smooth lerp transition for orbit line brightness when planet is hovered
   useFrame((_, delta) => {
     if (materialRef.current) {
       const targetOpacity = isHovered ? Math.min(opacity * 2.8, 0.45) : opacity;
@@ -54,7 +57,6 @@ function OrbitLine({ radius, rotation, opacity, color, isHovered }) {
 }
 
 export default function Orbits({ sunPosition = [2.0, 0, 0], scale = 1, hoveredPlanetId }) {
-  // Find orbit index of currently hovered planet
   const hoveredPlanet = PLANET_DATA.find((p) => p.id === hoveredPlanetId);
   const hoveredOrbitIndex = hoveredPlanet ? hoveredPlanet.orbitIndex : -1;
 
